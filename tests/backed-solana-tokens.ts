@@ -15,8 +15,7 @@ describe("backed-solana-tokens", () => {
   const program = anchor.workspace.MultiplierUpdater as Program<MultiplierUpdater>;
 
   it("Example run", async () => {
-    
-
+  
     // Create a test token with metadata
     const mintAddress = await createTestToken(wallet, program);
   

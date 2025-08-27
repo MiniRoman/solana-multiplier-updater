@@ -6,12 +6,15 @@ pub mod instructions;
 pub mod state;
 pub mod utils;
 
+#[cfg(test)]
+pub mod tests;
+
 use handlers::*;
 use instructions::initialize::*;
 use instructions::initialize_token::*;
 use instructions::update_multiplier::*;
 
-declare_id!("9ieG4SHhHLPB4XtmpmMxZqHXQ9WRaTZfgT7aAFXYrvzs");
+declare_id!("7z159fLmKZxJ6dP3FhPoKHyZxZAAWSkphUsgWMwGmgod");
 
 #[program]
 pub mod multiplier_updater {
@@ -23,7 +26,7 @@ pub mod multiplier_updater {
         initialize::handler(ctx)
     }
     
-    pub fn initialize_token(ctx: Context<InitializeToken>) -> Result<()> {
+    pub fn initialize_token(_ctx: Context<InitializeToken>) -> Result<()> {
         Ok(())
     }
 

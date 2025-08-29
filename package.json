@@ -2,7 +2,17 @@
   "license": "ISC",
   "scripts": {
     "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
-    "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check"
+    "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check",
+    "test": "yarn test:unit && yarn test:integration",
+    "test:anchor": "PATH=\"$HOME/.local/share/solana/install/active_release/bin:$PATH\" anchor test",
+    "test:unit": "cd programs/backed-solana-tokens && cargo test",
+    "test:integration": "PATH=\"$HOME/.local/share/solana/install/active_release/bin:$PATH\" anchor test --skip-local-validator",
+    "test:comprehensive": "PATH=\"$HOME/.local/share/solana/install/active_release/bin:$PATH\" yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/run-all-tests.ts",
+    "test:init": "PATH=\"$HOME/.local/share/solana/install/active_release/bin:$PATH\" yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/initialize*.test.ts",
+    "test:update": "PATH=\"$HOME/.local/share/solana/install/active_release/bin:$PATH\" yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/update-multiplier.test.ts",
+    "test:errors": "PATH=\"$HOME/.local/share/solana/install/active_release/bin:$PATH\" yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/error-cases.test.ts",
+    "test:security": "PATH=\"$HOME/.local/share/solana/install/active_release/bin:$PATH\" yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/security-authorization.test.ts",
+    "test:timing": "PATH=\"$HOME/.local/share/solana/install/active_release/bin:$PATH\" yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/timing-nonce-validation.test.ts"
   },
   "dependencies": {
     "@coral-xyz/anchor": "0.31.1",

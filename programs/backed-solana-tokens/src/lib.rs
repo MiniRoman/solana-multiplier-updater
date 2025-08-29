@@ -6,12 +6,17 @@ pub mod instructions;
 pub mod state;
 pub mod utils;
 
+#[cfg(test)]
+pub mod tests;
+
 use handlers::*;
 use instructions::initialize::*;
 use instructions::initialize_token::*;
+use instructions::transfer_ownership::*;
 use instructions::update_multiplier::*;
+use instructions::update_multiplier_data_only::*;
 
-declare_id!("9ieG4SHhHLPB4XtmpmMxZqHXQ9WRaTZfgT7aAFXYrvzs");
+declare_id!("7z159fLmKZxJ6dP3FhPoKHyZxZAAWSkphUsgWMwGmgod");
 
 #[program]
 pub mod multiplier_updater {
@@ -23,7 +28,7 @@ pub mod multiplier_updater {
         initialize::handler(ctx)
     }
     
-    pub fn initialize_token(ctx: Context<InitializeToken>) -> Result<()> {
+    pub fn initialize_token(_ctx: Context<InitializeToken>) -> Result<()> {
         Ok(())
     }
 
@@ -35,5 +40,13 @@ pub mod multiplier_updater {
 
     pub fn update_multiplier_with_nonce(ctx: Context<UpdateMultiplier>, multiplier: f64, activation_time: i64, multiplier_nonce: u64) -> Result<()> {
         update_multiplier::handler(ctx, multiplier, activation_time, multiplier_nonce)
+    }
+
+    pub fn transfer_ownership(ctx: Context<TransferOwnership>) -> Result<()> {
+        transfer_ownership::handler(ctx)
+    }
+
+    pub fn update_multiplier_data_only(ctx: Context<UpdateMultiplierDataOnly>, multiplier: f64, activation_time: i64, multiplier_nonce: u64) -> Result<()> {
+        update_multiplier_data_only::handler(ctx, multiplier, activation_time, multiplier_nonce)
     }
 }
